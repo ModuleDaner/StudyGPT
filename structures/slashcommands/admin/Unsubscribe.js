@@ -74,7 +74,7 @@ module.exports = {
           value: `- **${Reason || "Not specified"}**`,
         })
         .setTimestamp();
-      interaction.reply({ embeds: [UserDm] });
+      interaction.reply({ embeds: [UserDm], ephemeral: true });
 
       const UserDm2 = new EmbedBuilder()
         .setColor(Colors.DarkRed)
@@ -92,9 +92,10 @@ module.exports = {
         .setTimestamp();
       User.send({ embeds: [UserDm2] });
       try {
-        const channel = interaction.guild.channels.cache.some(channel => channel.id === '1343453651116752906');
+        const channel = interaction.guild.channels.cache.get('1343453651116752906');
+        
         if (channel)
-          channel.send({ embeds: [exampleEmbed]})
+          channel.send({ embeds: [UserDm]})
       } catch (error) {}
     }
   },

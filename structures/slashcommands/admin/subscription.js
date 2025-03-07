@@ -123,7 +123,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({ text: "StudyGpt" });
 
-    interaction.reply({ embeds: [exampleEmbed] });
+    interaction.reply({ embeds: [exampleEmbed], ephemeral: true });
 
     const UserDm = new EmbedBuilder()
       .setColor(Colors.DarkGold)
@@ -145,7 +145,7 @@ module.exports = {
     } catch (error) {}
     try {
       const channel = interaction.guild.channels.cache.get('1343453651116752906');
-      console.log(channel);
+
       if (channel)
         channel.send({ embeds: [exampleEmbed]})
     } catch (error) {}

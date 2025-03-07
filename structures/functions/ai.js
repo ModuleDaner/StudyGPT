@@ -18,8 +18,12 @@ async function Ai(Message) {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
         OldData.slice(UserSubData.Tier === "1" ? -1 : -2).forEach((Item) => {
           OldDataArray.push({
-            role: "system",
-            content: `This is your history : I have been asked you : ${Item.MyMessage} . And you are give me this response : ${Item.AiMessage}  `,
+           role: "system",
+content: `Here is your conversation history: 
+User asked: "${Item.MyMessage}"  
+You responded: "${Item.AiMessage}"  
+Use this context to provide a relevant and consistent response.`,
+
           });
         });
       }

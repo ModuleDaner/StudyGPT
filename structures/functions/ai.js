@@ -14,22 +14,27 @@ async function Ai(Message) {
     };
     const OldData = apiHistoryData.get(Message.author.id) || [];
     let OldDataArray = [];
+    
     try {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
-        // Extract the number of items based on tier
+        // Determine how many items to keep (1 for Tier 1, 2 for Tier 2)
         const itemsToKeep = UserSubData.Tier == "1" ? 1 : 2;
-        const slicedData = OldData.slice(-itemsToKeep); // Get the last 1 or 2 items
     
+        // Extract the last `itemsToKeep` items
+        const slicedData = OldData.slice(-itemsToKeep);
+    
+        // Add sliced data to the new array
         slicedData.forEach((Item) => {
           OldDataArray.push({
             role: "assistant",
-            content: `I have been asked you : ${Item.MyMessage}. And you are give me this response: ${Item.AiMessage}`,
+            content: `I have been asked you: ${Item.MyMessage}. And you are give me this response: ${Item.AiMessage}`,
           });
         });
       }
     } catch (error) {
       console.error("Error processing old data:", error);
     }
+    
     
     let Model = "qwen/qwen2.5-vl-72b-instruct:free";
     if (UserSubData.Tier === "1") {

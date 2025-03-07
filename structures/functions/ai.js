@@ -19,7 +19,7 @@ async function Ai(Message) {
         OldData.slice(UserSubData.Tier === "1" ? -1 : -2).forEach((Item) => {
           OldDataArray.push({
             role: "system",
-            content: `I have been asked you : ${Item.MyMessage} . And you are give me this response : ${Item.AiMessage}  . Use it as history `,
+            content: `This is your history : I have been asked you : ${Item.MyMessage} . And you are give me this response : ${Item.AiMessage}  `,
           });
         });
       }

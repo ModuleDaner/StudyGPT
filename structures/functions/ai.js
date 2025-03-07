@@ -33,7 +33,7 @@ async function Ai(Message) {
 
     let Model = "qwen/qwen2.5-vl-72b-instruct:free";
     if (UserSubData.Tier === "1") {
-      Model = "google/gemini-2.0-flash-lite-001";
+      Model = "google/gemini-flash-1.5";
     } else if (UserSubData.Tier === "2") {
       Model = "openai/gpt-4o-mini";
     }

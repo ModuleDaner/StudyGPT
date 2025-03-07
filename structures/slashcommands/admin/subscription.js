@@ -144,7 +144,7 @@ module.exports = {
       User.send({ embeds: [UserDm] });
     } catch (error) {}
     try {
-      const channel = interaction.guild.channels.cache.some(channel => channel.id == '1343453651116752906');
+      const channel = interaction.guild.channels.cache.get('1343453651116752906');
       console.log(channel);
       if (channel)
         channel.send({ embeds: [exampleEmbed]})

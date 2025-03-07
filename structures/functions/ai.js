@@ -25,7 +25,7 @@ async function Ai(Message) {
     
         OldData.forEach((Item) => {
           OldDataArray.push({
-            role: "assistant",
+            role: "system",
             content: `I have been asked you: ${Item.MyMessage}. And you are give me this response: ${Item.AiMessage}`,
           });
         });

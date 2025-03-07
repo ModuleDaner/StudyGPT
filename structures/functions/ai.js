@@ -18,7 +18,7 @@ async function Ai(Message) {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
         OldData.slice(UserSubData.Tier == "1" ? -1 : -2).forEach((Item) => {
           OldDataArray.push({
-            role: "system",
+            role: "assistant",
             content: `I have been asked you : ${Item.MyMessage} . And you are give me this response${Item.AiMessage}`,
           });
         });

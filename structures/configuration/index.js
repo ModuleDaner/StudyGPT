@@ -1,11 +1,10 @@
 module.exports = {
-    client_token: "MTEzNTcyNDA5MTkzNzEyODU5MA.GVqGs6.8l45_Iu31Xc_c0nm1xX6NfPd3oHDtvuBGCtWxE",
-    client_id: "1135724091937128590",
+    client_token: "MTMzOTk5Njk1NTA1NjUzNzY4MA.GJAOIK.Kio7blEDYoMFOPOCvpijT2l_BCnZyIlUbVqqjQ",
+    client_id: "1339996955056537680",
     client_prefix: "!",
     mongodb_url: "", //optional
     developers: ["1062197137749852290","760903287343284334"],
-    sharding: false,
+    sharding: true,
     database: false,
     dev_guild : "1266510128295710832"
 }
-

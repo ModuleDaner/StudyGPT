@@ -47,8 +47,9 @@ function toSubscriptSmart(text) {
 
 function latexToPlainText(latex) {
     return latex
-    .replace(/(?<=\n|\b)\[|\](?=\n|\b)/g, '\n') 
-    .replace(/(?<=\n|\b)\\\[|\\\](?=\n|\b)/g, '\n')
+    .replace(/(?<=\n|\b)\[\s*|\s*\](?=\n|\b)/g, '') 
+    .replace(/(?<=\n|\b)\\\[\s*|\\\]\s*(?=\n|\b)/g, '')
+    
     .replace(/\\times/g, '×')
     .replace(/\\div/g, '÷')
     .replace(/\\textsc{([^}]*)}/g, function(match, text) {
@@ -235,6 +236,7 @@ function latexToPlainText(latex) {
     .map(line => toSubscriptSmart(line))
     .join('\n')
 
+    .replace(/(?<!\[)\s*\](?=\n|\b)/g, '')
     .replace(/\\/g, '');
 };
 

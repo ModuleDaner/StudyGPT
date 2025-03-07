@@ -53,7 +53,7 @@ module.exports = {
           }
         )
         .setTimestamp();
-      return interaction.reply({ embeds: [UserDm] });
+      return interaction.reply({ embeds: [UserDm], ephemeral: true });
     }
   },
 };

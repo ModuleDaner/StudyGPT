@@ -49,27 +49,6 @@ async function Ai(Message) {
     }
 
     Message.channel.sendTyping();
-
-    const _content = []
-    
-    if (userMessage != '') {
-      content.push(
-        {
-          type: 'text',
-          text: userMessage,
-        }
-      )
-    }
-    if (Message.attachments.first()) {
-      content.push(
-        {
-          type: "image_url",
-          image_url: {
-            url: Message.attachments.first().url,
-          },
-        }
-      )
-    }
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -81,7 +60,23 @@ async function Ai(Message) {
           },
           {
             role: "user",
-            content: _content
+            content: [
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "text",
+                    text: userMessage,
+                  },
+                  Message.attachments.first() && {
+                    type: "image_url",
+                    image_url: {
+                      url: Message.attachments.first().url,
+                    },
+                  },
+                ].filter(Boolean),
+              }
+            ]
           },
           ...OldDataArray,
           

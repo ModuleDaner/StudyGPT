@@ -36,7 +36,7 @@ module.exports = {
     const Data = subscriptions.get(User.id);
 
     if (!Data) {
-      return interaction.reply("هذا المستخدم غير مشترك");
+      return interaction.reply({content: "هذا المستخدم غير مشترك", ephemeral: true});
     } else {
       const UserDm = new EmbedBuilder()
         .setColor(Colors.Aqua)

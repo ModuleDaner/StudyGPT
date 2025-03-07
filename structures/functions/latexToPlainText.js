@@ -209,9 +209,9 @@ function latexToPlainText(latex) {
         const isSubscriptable = [...denominator].every(char => char in subscriptMap);
 
         if (isSuperscriptable && isSubscriptable) {
-            return `${processNested(numerator, superscriptMap)}∕${processNested(denominator, subscriptMap)}`;
+            return `[${processNested(numerator, superscriptMap)}∕${processNested(denominator, subscriptMap)}]`;
         } else {
-            return `${numerator} / ${denominator}`;
+            return `[${numerator}] / [${denominator}]`;
         }
     })
 

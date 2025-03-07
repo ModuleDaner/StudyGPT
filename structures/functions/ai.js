@@ -26,6 +26,8 @@ async function Ai(Message) {
     } catch (error) {
       console.error("Error processing old data:", error);
     }
+
+    console.log(OldDataArray)
     let Model = "qwen/qwen2.5-vl-72b-instruct:free";
     if (UserSubData.Tier === "1") {
       Model = "google/gemini-flash-1.5";

@@ -76,7 +76,7 @@ async function Ai(Message) {
             role: "user",
             content: messageContent
           },
-          ...OldDataArray,
+          //...OldDataArray,
         ],
       },
       {

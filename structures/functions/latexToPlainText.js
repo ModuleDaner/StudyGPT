@@ -47,8 +47,6 @@ function toSubscriptSmart(text) {
 
 function latexToPlainText(latex) {
     return latex
-    .replace(/(?<=\n|\b)\[\s*|\s*\](?=\n|\b)/g, '') 
-    .replace(/(?<=\n|\b)\\\[\s*|\\\]\s*(?=\n|\b)/g, '')
     
     .replace(/\\times/g, '×')
     .replace(/\\div/g, '÷')
@@ -205,25 +203,34 @@ function latexToPlainText(latex) {
 
     .replace(/\\%{([^}]+)}{([^}]+)}/g, '{$1%$2}')
     .replace(/\\pi/g, 'π')
-    .replace(/\\frac{([^}]+)}{([^}]+)}/g, (match, numerator, denominator) => {
-        const isSuperscriptable = [...numerator].every(char => char in superscriptMap);
-        const isSubscriptable = [...denominator].every(char => char in subscriptMap);
-
+    .replace(/\\frac{([^{}]+|{[^{}]*})+}{([^{}]+|{[^{}]*})+}/g, (match, numerator, denominator) => {
+        const processNested = (text, map) => {
+            return [...text].map(char => map[char] || char).join('');
+        };
+    
+        const isSuperscriptable = [...numerator].every(char => superscriptMap[char]);
+        const isSubscriptable = [...denominator].every(char => subscriptMap[char]);
+    
         if (isSuperscriptable && isSubscriptable) {
             return `[${processNested(numerator, superscriptMap)}∕${processNested(denominator, subscriptMap)}]`;
         } else {
             return `[${numerator}] / [${denominator}]`;
         }
     })
+    
 
-    .replace(/\\dfrac{([^}]+)}{([^}]+)}/g, (match, numerator, denominator) => {
-        const isSuperscriptable = [...numerator].every(char => char in superscriptMap);
-        const isSubscriptable = [...denominator].every(char => char in subscriptMap);
-        
+    .replace(/\\dfrac{([^{}]+|{[^{}]*})+}{([^{}]+|{[^{}]*})+}/g, (match, numerator, denominator) => {
+        const processNested = (text, map) => {
+            return [...text].map(char => map[char] || char).join('');
+        };
+    
+        const isSuperscriptable = [...numerator].every(char => superscriptMap[char]);
+        const isSubscriptable = [...denominator].every(char => subscriptMap[char]);
+    
         if (isSuperscriptable && isSubscriptable) {
-            return `${processNested(numerator, superscriptMap)}∕${processNested(denominator, subscriptMap)}`;
+            return `[${processNested(numerator, superscriptMap)}∕${processNested(denominator, subscriptMap)}]`;
         } else {
-            return `${numerator} / ${denominator}`;
+            return `[${numerator}] / [${denominator}]`;
         }
     })
 
@@ -236,7 +243,9 @@ function latexToPlainText(latex) {
     .map(line => toSubscriptSmart(line))
     .join('\n')
 
+    .replace(/(?<!\])\s*\[(?=\n|\b)/g, '')
     .replace(/(?<!\[)\s*\](?=\n|\b)/g, '')
+
     .replace(/\\/g, '');
 };
 

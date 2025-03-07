@@ -81,7 +81,7 @@ async function Ai(Message) {
           },
           {
             role: "user",
-            _content
+            content: _content
           },
           ...OldDataArray,
           

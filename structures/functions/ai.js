@@ -16,7 +16,7 @@ async function Ai(Message) {
     let OldDataArray = [];
     try {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
-        OldData.slice(UserSubData.Tier === "1" ? -2 : -4).forEach((Item) => {
+        OldData.slice(UserSubData.Tier == "1" ? -1 : -2).forEach((Item) => {
           OldDataArray.push({
             role: "system",
             content: `I have been asked you : ${Item.MyMessage} . And you are give me this response${Item.AiMessage}`,
@@ -62,7 +62,7 @@ async function Ai(Message) {
         messages: [
           {
             role: "system",
-            content: `Respond in the language the user uses. Always answer in Unicode symbols or plain text. Do not use LaTeX. Always follow these rules. Make your response efficient, summarized, and clear. Never answer political questions. Do not answer religious questions unless referring to the Quran. Use Discord design script. Your name is StudyGPT. Do not answer non-educational questions. Do not answer inappropriate questions unless related to biology. Do not respond to unnecessary requests. Use emojis and special symbols to enhance the experience. User name is ${Message.author.globalName}`,
+            content: `Respond in the language the user uses. Always follow these rules. Make your response efficient, summarized, and clear. Never answer political questions. Do not answer religious questions unless referring to the Quran. Use Discord design script to make your response fancy. Your name is StudyGPT. Do not answer non-educational questions. Do not answer inappropriate questions unless related to biology. Do not respond to unnecessary requests. Use emojis and special symbols to enhance the experience. User name is ${Message.author.globalName}`,
           },
           {
             role: "user",

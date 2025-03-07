@@ -60,17 +60,23 @@ async function Ai(Message) {
           },
           {
             role: "user",
-            content: userMessage,
+            content: [
+              {
+                type: 'text',
+                text: userMessage,
+              },
+              Message.attachments.first()
+              ? {
+                  type: "image_url",
+                  image_url: {
+                    url: Message.attachments.first().url,
+                  },
+                }
+              : null,
+            ]
           },
           ...OldDataArray,
-          Message.attachments.first()
-            ? {
-                type: "image_url",
-                image_url: {
-                  url: Message.attachments.first().url,
-                },
-              }
-            : null,
+          
         ],
       },
       {

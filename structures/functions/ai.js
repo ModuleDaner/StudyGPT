@@ -16,16 +16,21 @@ async function Ai(Message) {
     let OldDataArray = [];
     try {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
-        OldData.slice(UserSubData.Tier == "1" ? -1 : -2).forEach((Item) => {
+        // Extract the number of items based on tier
+        const itemsToKeep = UserSubData.Tier == "1" ? 1 : 2;
+        const slicedData = OldData.slice(-itemsToKeep); // Get the last 1 or 2 items
+    
+        slicedData.forEach((Item) => {
           OldDataArray.push({
             role: "assistant",
-            content: `I have been asked you : ${Item.MyMessage} . And you are give me this response${Item.AiMessage}`,
+            content: `I have been asked you : ${Item.MyMessage}. And you are give me this response: ${Item.AiMessage}`,
           });
         });
       }
     } catch (error) {
       console.error("Error processing old data:", error);
     }
+    
     let Model = "qwen/qwen2.5-vl-72b-instruct:free";
     if (UserSubData.Tier === "1") {
       Model = "google/gemini-flash-1.5";
@@ -96,7 +101,7 @@ async function Ai(Message) {
           MyMessage: userMessage.replace(`<@${Message.client.user.id}>`, ""),
           AiMessage: aiResponse,
         },
-      ])
+      ]),
     );
   } catch (error) {
     console.error(

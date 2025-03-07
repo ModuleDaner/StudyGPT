@@ -18,8 +18,6 @@ async function Ai(Message) {
     try {
       if (UserSubData.Tier == "1" || UserSubData.Tier == "2") {
         const itemsToKeep = UserSubData.Tier == "1" ? 1 : 2;
-    
-        itemsToKeep = itemsToKeep - 1
 
         while (OldData.length > itemsToKeep) {
           OldData.shift();
